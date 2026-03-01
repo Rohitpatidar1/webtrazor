@@ -1,0 +1,204 @@
+/* GLOBAL COLORS & THEME */
+:root {
+  --primary-color: #00bfa6;
+  --bg-light: #f8fb88;
+  --bg-dark: #0f172a;
+  --text-dark: #1e293b;
+  --card-dark: #1e293b;
+  --white: #ffffff;
+}
+
+.adminProjectsWrapper {
+  padding: 40px;
+  min-height: 100vh;
+  transition: 0.3s ease;
+}
+
+.lightMode { background: var(--bg-light); color: var(--text-dark); }
+.darkMode { background: var(--bg-dark); color: white; }
+
+/* HEADER */
+.projectsHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 30px;
+}
+
+.addProjectBtn {
+  background: var(--primary-color);
+  border: none;
+  padding: 12px 24px;
+  border-radius: 30px;
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
+  box-shadow: 0 4px 15px rgba(0, 191, 166, 0.3);
+}
+
+/* TABLE STYLES */
+.projectsTable {
+  width: 100%;
+  background: white;
+  border-radius: 15px;
+  overflow: hidden;
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
+}
+
+.darkMode .projectsTable { background: var(--card-dark); }
+
+.tableRow {
+  display: grid;
+  grid-template-columns: 2fr 1.5fr 1.5fr 1fr;
+  padding: 15px 25px;
+  border-bottom: 1px solid #eee;
+  align-items: center;
+}
+
+.tableHead {
+  background: var(--primary-color);
+  color: white;
+  font-weight: 600;
+  border: none;
+}
+
+.tableActions {
+  display: flex;
+  gap: 10px;
+}
+
+.tableActions button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 18px;
+}
+
+/* MODAL OVERLAY */
+.modalOverlay {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  background: rgba(0, 0, 0, 0.7);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+  padding: 20px;
+}
+
+.projectModal {
+  width: 100%;
+  max-width: 700px;
+  background: white;
+  padding: 30px;
+  border-radius: 20px;
+  max-height: 90vh;
+  overflow-y: auto;
+  position: relative;
+}
+
+.darkMode .projectModal { background: #1e293b; color: white; }
+
+.modalHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.modalHeader button {
+  background: none; border: none; font-size: 20px; cursor: pointer; color: inherit;
+}
+
+/* FORM STYLES */
+.formGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 15px;
+  margin-bottom: 15px;
+}
+
+.formGrid input, .formGrid select, textarea {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  background: #fff;
+  font-family: inherit;
+}
+
+textarea { margin-top: 10px; resize: vertical; }
+
+/* UPLOAD SECTION */
+.uploadContainer {
+  margin-top: 20px;
+  padding: 20px;
+  border: 2px dashed var(--primary-color);
+  border-radius: 12px;
+  text-align: center;
+}
+
+.cloudinary-upload-btn {
+  background: var(--primary-color);
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.mediaPreviewGrid {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-top: 15px;
+}
+
+.previewBox {
+  position: relative;
+  width: 90px;
+  height: 90px;
+  border-radius: 8px;
+  overflow: hidden;
+  border: 1px solid #ddd;
+}
+
+.previewBox img, .previewBox video {
+  width: 100%; height: 100%; object-fit: cover;
+}
+
+.removeBtn {
+  position: absolute;
+  top: 2px; right: 2px;
+  background: rgba(255, 0, 0, 0.8);
+  color: white; border: none;
+  border-radius: 50%;
+  width: 22px; height: 22px;
+  cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+}
+
+/* ACTIONS */
+.modalActions {
+  display: flex;
+  gap: 10px;
+  margin-top: 25px;
+}
+
+.saveBtn {
+  flex: 2;
+  background: var(--primary-color);
+  color: white; border: none;
+  padding: 12px; border-radius: 8px;
+  font-weight: bold; cursor: pointer;
+}
+
+.cancelBtn {
+  flex: 1;
+  background: #eee;
+  color: #333; border: none;
+  padding: 12px; border-radius: 8px;
+  cursor: pointer;
+}

@@ -1,0 +1,111 @@
+.adminFeedbackWrapper {
+  padding: 40px;
+  min-height: 100vh;
+  transition: 0.3s ease;
+}
+
+/* THEME - background set to #f8fb88 as requested previously */
+.lightMode {
+  background: #f8fb88;
+  color: #0f172a;
+}
+
+.darkMode {
+  background: #0f172a;
+  color: white;
+}
+
+/* HEADER */
+.feedbackHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 30px;
+}
+
+.exportBtn {
+  background: #00bfa6;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 20px;
+  color: white;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+/* TABLE */
+.feedbackTable {
+  width: 100%;
+  max-width: 1100px;
+  margin: 0 auto; /* Center the table */
+  background: white;
+  border-radius: 15px;
+  overflow: hidden;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+}
+
+.darkMode .feedbackTable {
+  background: #1e293b;
+}
+
+.feedbackRow {
+  display: grid;
+  /* Updated columns to fit delete button */
+  grid-template-columns: 1fr 1.5fr 0.8fr 2fr 1fr 0.8fr;
+  padding: 15px 20px;
+  align-items: center;
+  border-bottom: 1px solid #eee;
+}
+
+.feedbackHead {
+  background: #00bfa6;
+  color: white;
+  font-weight: bold;
+  border-bottom: none;
+}
+
+.rating {
+  color: #ffa500; /* Gold color for stars */
+}
+
+.msgText {
+  font-size: 14px;
+  color: #555;
+}
+
+.darkMode .msgText {
+  color: #ccc;
+}
+
+/* DELETE BUTTON */
+.deleteBtn {
+  background: #ff4d4d;
+  color: white;
+  border: none;
+  padding: 6px 12px;
+  border-radius: 15px;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.deleteBtn:hover {
+  background: #e60000;
+  transform: scale(1.05);
+}
+
+.noData {
+  padding: 30px;
+  text-align: center;
+  font-weight: bold;
+}
+
+/* RESPONSIVE */
+@media (max-width: 900px) {
+  .feedbackRow {
+    grid-template-columns: 1fr 1fr;
+    row-gap: 15px;
+  }
+  .feedbackHead {
+    display: none;
+  }
+}
