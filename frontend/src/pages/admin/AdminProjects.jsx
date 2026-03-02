@@ -10,6 +10,7 @@ import {
   MapPin,
   Briefcase,
   User,
+  Cpu, // Naya icon technologies ke liye
 } from "lucide-react";
 
 export default function AdminProjects() {
@@ -29,6 +30,7 @@ export default function AdminProjects() {
     category: "",
     location: "",
     description: "",
+    technologies: "", // Added technologies field
     images: [],
     video: null,
   });
@@ -121,6 +123,7 @@ export default function AdminProjects() {
     }
     setLoading(true);
     const token = localStorage.getItem("adminToken");
+
     const payload = {
       ...formData,
       images: formData.images.map((img) => img.file),
@@ -129,7 +132,7 @@ export default function AdminProjects() {
 
     const url = isEditing
       ? `http://127.0.0.1:8000/api/project/update-full/${currentProjectId}/`
-      : "http://127.0.0.1:8000/api/upload-project/";
+      : "http://127.0.0.1:8000/api/tech/"; // Updated URL as per your request
 
     try {
       const response = await fetch(url, {
@@ -164,6 +167,7 @@ export default function AdminProjects() {
       category: proj.category,
       location: proj.location,
       description: proj.description,
+      technologies: proj.technologies || "", // Populating technologies on edit
       images: existingImages,
       video: existingVideo,
     });
@@ -211,6 +215,7 @@ export default function AdminProjects() {
               category: "",
               location: "",
               description: "",
+              technologies: "",
               images: [],
               video: null,
             });
@@ -250,9 +255,22 @@ export default function AdminProjects() {
                       <div className="p-2.5 rounded-xl bg-[#00BF56]/10 text-[#00BF56]">
                         <ImageIcon size={18} />
                       </div>
-                      <span className="font-black text-sm uppercase italic tracking-tighter">
-                        {proj.title}
-                      </span>
+                      <div className="flex flex-col">
+                        <span className="font-black text-sm uppercase italic tracking-tighter">
+                          {proj.title}
+                        </span>
+                        {/* Preview of tech tags in table */}
+                        <div className="flex flex-wrap gap-1 mt-1">
+                          {proj.tech_list?.slice(0, 3).map((t, i) => (
+                            <span
+                              key={i}
+                              className="text-[8px] bg-[#00BF56]/10 text-[#00BF56] px-1.5 rounded uppercase font-bold"
+                            >
+                              {t}
+                            </span>
+                          ))}
+                        </div>
+                      </div>
                     </div>
                   </td>
                   <td className="px-6 py-5 text-sm font-bold opacity-70 italic tracking-tight underline underline-offset-4 decoration-[#00BF56]/30">
@@ -354,6 +372,41 @@ export default function AdminProjects() {
                     />
                   </div>
                 </div>
+
+                {/* --- NEW TECHNOLOGIES FIELD --- */}
+                <div className="space-y-2 md:col-span-2">
+                  <label className="text-[10px] font-black uppercase opacity-50 ml-2">
+                    Technologies Used (Comma Separated)
+                  </label>
+                  <div className="relative">
+                    <Cpu
+                      className="absolute left-4 top-1/2 -translate-y-1/2 opacity-30"
+                      size={16}
+                    />
+                    <input
+                      name="technologies"
+                      value={formData.technologies}
+                      placeholder="e.g. React, Tailwind CSS, Python, PostgreSQL"
+                      onChange={handleChange}
+                      className={`w-full pl-12 pr-4 py-3.5 rounded-2xl outline-none border transition-all ${isDark ? "bg-white/5 border-white/10 focus:border-[#00BF56]" : "bg-slate-50 border-slate-200 focus:border-[#00BF56]"}`}
+                    />
+                  </div>
+                  {/* Real-time Preview of Tags */}
+                  <div className="flex flex-wrap gap-2 mt-2 px-2">
+                    {formData.technologies.split(",").map(
+                      (tech, i) =>
+                        tech.trim() && (
+                          <span
+                            key={i}
+                            className="px-3 py-1 bg-[#00BF56]/10 text-[#00BF56] border border-[#00BF56]/20 rounded-lg text-[10px] font-bold uppercase tracking-tight"
+                          >
+                            {tech.trim()}
+                          </span>
+                        ),
+                    )}
+                  </div>
+                </div>
+
                 <div className="space-y-2">
                   <label className="text-[10px] font-black uppercase opacity-50 ml-2">
                     Category Selection *

@@ -129,8 +129,8 @@ const Hero = () => {
     },
   ];
   const steps = [
-    { id: "01", title: "Fill Form", icon: <Mail />, link: "/contact" },
-    { id: "02", title: "Online Meeting", icon: <Users /> },
+    { id: "01", title: "Fill Form", icon: <Mail />, link: "/buyservices" },
+    { id: "02", title: "Online/offline Meeting", icon: <Users /> },
     { id: "03", title: "Requirement", icon: <Search /> },
     { id: "04", title: "Design", icon: <Palette /> },
     { id: "05", title: "Development", icon: <Code /> },
@@ -139,12 +139,24 @@ const Hero = () => {
   ];
   const faqs = [
     {
-      q: "Project complete hone mein kitna time lagta hai?",
-      a: "Project ki complexity par depend karta hai, lekin normal business website 2-4 weeks mein ready ho jati hai.",
+      q: "How long does it take to complete a project?",
+      a: "The timeline depends on the project's complexity. Typically, a professional business website takes 2-4 weeks, while complex E-commerce or SaaS platforms may take 6-10 weeks.",
     },
     {
-      q: "Kya aap maintenance support dete hain?",
-      a: "Haan, hum deployment ke baad 6 mahine tak free maintenance aur 24/7 technical support provide karte hain.",
+      q: "Do you provide post-launch maintenance and support?",
+      a: "Yes, we offer 6 months of free maintenance and 24/7 technical support after deployment to ensure your digital product runs smoothly without any glitches.",
+    },
+    {
+      q: "Will my website be mobile-friendly and SEO-optimized?",
+      a: "Absolutely! Every project we build is 100% responsive (mobile-first design) and follows the latest SEO best practices to help you rank higher on search engines.",
+    },
+    {
+      q: "Which technologies do you use for development?",
+      a: "We specialize in the MERN stack (MongoDB, Express, React, Node.js), Tailwind CSS, and Next.js. For AI and Automation, we use Python and advanced API integrations.",
+    },
+    {
+      q: "Can you redesign my existing website?",
+      a: "Yes! We can revamp your current website with a modern UI/UX, faster loading speeds, and better performance while keeping your existing data safe.",
     },
   ];
 
@@ -229,7 +241,6 @@ const Hero = () => {
                 <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#00BF56] to-emerald-400">
                   Success
                 </span>{" "}
-                .
               </h1>
 
               <motion.p
@@ -248,7 +259,7 @@ const Hero = () => {
               >
                 <Link to="/buyservices" className="inline-block no-underline">
                   <button className="px-8 py-4 bg-[#00BF56] text-white font-bold rounded-2xl shadow-xl hover:shadow-[#00BF56]/20 transition-all flex items-center gap-2 border-none cursor-pointer">
-                    Launch Your Project <Rocket size={20} />
+                    Make Your WebSite <Rocket size={20} />
                   </button>
                 </Link>
               </motion.div>
@@ -376,7 +387,7 @@ const Hero = () => {
                 <p
                   className={`mt-2 font-medium opacity-60 ${isDarkMode ? "text-slate-400" : "text-slate-600"}`}
                 >
-                  Crafting digital excellence, one pixel at a time.
+                  Designed for Performance. Developed for Perfection.
                 </p>
               </div>
               <Link
@@ -663,46 +674,41 @@ const Hero = () => {
         </section>
         {/* --- PREMIUM FEEDBACK SECTION --- */}
 
-        <section className="py-16 md:py-24 px-4 sm:px-6 relative overflow-hidden">
+        <section className="py-20 md:py-32 px-4 sm:px-6 relative overflow-hidden bg-transparent">
+          {/* Background Decorative Elements */}
+          <div className="absolute top-0 left-0 w-72 h-72 bg-[#00BF56]/10 blur-[120px] rounded-full pointer-events-none" />
+
           <div className="max-w-7xl mx-auto">
             {/* Header Section */}
-            <div className="text-center mb-12 md:mb-20 relative">
-              <motion.div
-                initial={{ opacity: 0, scale: 0.5 }}
-                whileInView={{ opacity: 1, scale: 1 }}
-                className="inline-block px-4 md:px-6 py-2 rounded-full mb-4 border"
-                style={{
-                  backgroundColor: `${secondaryColor}1a`,
-                  borderColor: `${secondaryColor}33`,
-                }}
+            <div className="text-left mb-16 relative">
+              <motion.span
+                initial={{ opacity: 0, x: -20 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                style={{ color: secondaryColor }}
+                className="block font-black uppercase tracking-[0.3em] text-xs mb-3"
               >
-                <span
-                  style={{ color: secondaryColor }}
-                  className="font-black uppercase tracking-widest text-[10px] md:text-xs"
-                >
-                  Success Stories
-                </span>
-              </motion.div>
+                // Real Testimonials
+              </motion.span>
 
               <h2
-                className={`text-4xl md:text-5xl lg:text-7xl font-black italic tracking-tighter leading-tight ${
+                className={`text-5xl md:text-7xl font-black tracking-tighter leading-none ${
                   isDarkMode ? "text-white" : "text-[#0B3C5D]"
                 }`}
               >
-                Trust by{" "}
+                What People <br />
                 <span
-                  className="text-transparent bg-clip-text bg-gradient-to-r"
+                  className="italic text-transparent bg-clip-text bg-gradient-to-r"
                   style={{
                     backgroundImage: `linear-gradient(to right, ${secondaryColor}, #10b981)`,
                   }}
                 >
-                  Industry Leaders
+                  Are Saying
                 </span>
               </h2>
             </div>
 
             {/* Marquee Container */}
-            <div className="flex overflow-hidden">
+            <div className="flex overflow-visible">
               {loadingFeedbacks && dynamicFeedbacks.length === 0 ? (
                 <div className="w-full text-center py-10">
                   <Loader2
@@ -714,98 +720,102 @@ const Hero = () => {
                 <motion.div
                   animate={{ x: ["0%", "-50%"] }}
                   transition={{
-                    duration: 30,
+                    duration: 40,
                     repeat: Infinity,
                     ease: "linear",
                   }}
-                  className="flex space-x-4 md:space-x-8 min-w-full"
+                  className="flex space-x-6 md:space-x-10 min-w-full"
                 >
                   {[...displayFeedbacks, ...displayFeedbacks].map((f, i) => (
                     <div
                       key={i}
-                      className={`flex-shrink-0 w-[280px] sm:w-[350px] md:w-[450px] p-6 md:p-10 rounded-[2rem] md:rounded-[3rem] border transition-all duration-500 relative group/card ${
+                      className={`flex-shrink-0 w-[320px] md:w-[420px] p-8 md:p-12 rounded-[2.5rem] border-2 transition-all duration-700 relative group/card ${
                         isDarkMode
-                          ? "bg-[#0a2538]/30 border-white/5 hover:bg-[#0a2538]/60 backdrop-blur-xl"
-                          : "bg-white border-slate-200 shadow-xl hover:shadow-2xl"
-                      }`}
+                          ? "bg-slate-900/40 border-white/5 hover:border-[#00BF56]/50 backdrop-blur-md"
+                          : "bg-white border-slate-100 shadow-[0_20px_50px_rgba(0,0,0,0.05)] hover:shadow-[0_20px_60px_rgba(0,191,86,0.15)]"
+                      } hover:-translate-y-4`}
                     >
-                      {/* Rating and Quote Icon */}
-                      <div className="flex justify-between items-start mb-6 md:mb-8">
-                        <div className="flex gap-0.5 md:gap-1">
-                          {[...Array(5)].map((_, idx) => (
-                            <span
-                              key={idx}
-                              style={{ color: secondaryColor }}
-                              className="text-base md:text-xl"
-                            >
-                              {idx < (f.stars || 5) ? "★" : "☆"}
-                            </span>
-                          ))}
-                        </div>
-                        <div
-                          style={{ color: secondaryColor }}
-                          className="opacity-30 group-hover/card:opacity-100 transition-opacity"
-                        >
-                          <MessageSquare
-                            size={28}
-                            className="md:w-[35px] md:h-[35px]"
-                          />
-                        </div>
+                      {/* Decorative Quote Mark */}
+                      <span
+                        className="absolute top-6 right-10 text-8xl font-serif opacity-10 group-hover/card:opacity-20 transition-opacity pointer-events-none"
+                        style={{ color: secondaryColor }}
+                      >
+                        “
+                      </span>
+
+                      {/* STARS SECTION - UPDATED FOR BETTER VISIBILITY */}
+                      <div className="flex gap-1.5 mb-8">
+                        {[...Array(5)].map((_, idx) => (
+                          <svg
+                            key={idx}
+                            xmlns="http://www.w3.org/2000/svg"
+                            viewBox="0 0 24 24"
+                            fill={
+                              idx < (f.stars || 5)
+                                ? secondaryColor
+                                : "transparent"
+                            }
+                            stroke={secondaryColor}
+                            strokeWidth="1.5"
+                            className="w-5 h-5 md:w-6 md:h-6 transition-transform group-hover/card:scale-110"
+                            style={{
+                              filter:
+                                idx < (f.stars || 5)
+                                  ? `drop-shadow(0 0 5px ${secondaryColor}66)`
+                                  : "none",
+                            }}
+                          >
+                            <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
+                          </svg>
+                        ))}
                       </div>
 
                       {/* Feedback Comment */}
                       <p
-                        className={`text-base md:text-xl leading-relaxed mb-6 md:mb-10 font-medium h-28 md:h-32 overflow-hidden ${
-                          isDarkMode ? "text-slate-300" : "text-slate-700"
+                        className={`text-lg md:text-xl leading-relaxed mb-12 font-bold italic min-h-[120px] ${
+                          isDarkMode ? "text-slate-300" : "text-black"
                         }`}
                       >
                         "{f.comment}"
                       </p>
 
-                      {/* User Profile Info */}
-                      <div className="flex items-center gap-3 md:gap-5">
-                        <div className="relative">
-                          <div
-                            className="w-10 h-10 md:w-14 md:h-14 rounded-xl md:rounded-2xl flex items-center justify-center text-white font-black text-lg md:text-xl shadow-lg"
-                            style={{
-                              background: `linear-gradient(to tr, ${secondaryColor}, #10b981)`,
-                              boxShadow: `0 10px 15px -3px ${secondaryColor}33`,
-                            }}
-                          >
-                            {f.name ? f.name.charAt(0) : "U"}
-                          </div>
-                          <div
-                            className="absolute -bottom-1 -right-1 w-3.5 h-3.5 md:w-5 md:h-5 border-2 rounded-full"
-                            style={{
-                              backgroundColor: secondaryColor,
-                              borderColor: isDarkMode ? "#0a2538" : "#fff",
-                            }}
-                          ></div>
+                      {/* User Profile */}
+                      <div
+                        className="flex items-center gap-4 border-t pt-8"
+                        style={{
+                          borderColor: isDarkMode
+                            ? "rgba(255,255,255,0.1)"
+                            : "rgba(0,0,0,0.05)",
+                        }}
+                      >
+                        <div
+                          className="w-12 h-12 rounded-2xl overflow-hidden flex items-center justify-center text-white font-bold shadow-lg"
+                          style={{
+                            background: `linear-gradient(135deg, ${secondaryColor}, #0B3C5D)`,
+                          }}
+                        >
+                          {f.name ? f.name.charAt(0) : "U"}
                         </div>
                         <div>
                           <h4
-                            className={`font-black text-sm md:text-lg tracking-tight ${
-                              isDarkMode ? "text-white" : "text-[#0B3C5D]"
-                            }`}
+                            className={`font-black text-lg ${isDarkMode ? "text-white" : "text-black"}`}
                           >
                             {f.name}
                           </h4>
                           <p
+                            className="text-[10px] font-black uppercase tracking-widest"
                             style={{ color: secondaryColor }}
-                            className="text-[10px] md:text-xs font-black uppercase tracking-widest"
                           >
                             {f.role}
                           </p>
                         </div>
                       </div>
 
-                      {/* Hover Bottom Border */}
+                      {/* Full Card Glow on Hover */}
                       <div
-                        className="absolute bottom-0 left-1/2 -translate-x-1/2 w-0 group-hover/card:w-1/2 h-1 transition-all duration-500"
-                        style={{
-                          backgroundImage: `linear-gradient(to right, transparent, ${secondaryColor}, transparent)`,
-                        }}
-                      ></div>
+                        className="absolute inset-0 rounded-[2.5rem] opacity-0 group-hover/card:opacity-100 transition-opacity duration-700 pointer-events-none shadow-[0_0_40px_rgba(0,191,86,0.1)] border-2"
+                        style={{ borderColor: secondaryColor }}
+                      />
                     </div>
                   ))}
                 </motion.div>

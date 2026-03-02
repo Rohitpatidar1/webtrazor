@@ -13,6 +13,8 @@ import FacebookIcon from "@mui/icons-material/Facebook";
 import InstagramIcon from "@mui/icons-material/Instagram";
 import LinkedInIcon from "@mui/icons-material/LinkedIn";
 import EmailIcon from "@mui/icons-material/Email";
+
+// ✅ Sabhi icons ko ek hi baar import karein (Duplicates removed)
 import {
   Send,
   MapPin,
@@ -20,6 +22,11 @@ import {
   ChevronRight,
   Sparkles,
   Loader2,
+  Code,
+  Database,
+  Shield,
+  Search,
+  Globe,
 } from "lucide-react";
 
 export default function Footer() {
@@ -34,7 +41,6 @@ export default function Footer() {
     type: "success",
   });
 
-  // ✅ Newsletter Email Send
   const handleNewsletterSubmit = (e) => {
     e.preventDefault();
     if (!email) return;
@@ -112,8 +118,8 @@ export default function Footer() {
             {[
               "Web Development",
               "UI/UX Design",
-              "Shopify Setup",
-              "Branding",
+              "Logo Design",
+              "AI Automation",
             ].map((item) => (
               <div key={item} style={{ marginBottom: 8 }}>
                 <Link
@@ -128,16 +134,54 @@ export default function Footer() {
 
           {/* Tech */}
           <div>
-            <h4 style={{ marginBottom: 20 }}>Technologies</h4>
-            {["React", "Node", "MongoDB", "Django", "Tailwind"].map((tech) => (
-              <div key={tech}>{tech}</div>
+            <h4 style={{ marginBottom: 20, fontWeight: "bold" }}>
+              Technologies
+            </h4>
+            {[
+              {
+                name: "React / Tailwind",
+                icon: <Code size={16} color={secondary} />,
+              },
+              {
+                name: "Express / Node",
+                icon: <Globe size={16} color={secondary} />,
+              },
+              {
+                name: "MongoDB / PostgreSQL",
+                icon: <Database size={16} color={secondary} />,
+              },
+              {
+                name: "Python / Django",
+                icon: <Sparkles size={16} color={secondary} />,
+              },
+              {
+                name: "SEO Ranking",
+                icon: <Search size={16} color={secondary} />,
+              },
+              {
+                name: "JWT / OAuth 2.0",
+                icon: <Shield size={16} color={secondary} />,
+              },
+            ].map((tech) => (
+              <div
+                key={tech.name}
+                style={{
+                  display: "flex",
+                  alignItems: "center",
+                  gap: "10px",
+                  marginBottom: "10px",
+                  opacity: 0.8,
+                }}
+              >
+                {tech.icon}
+                <span>{tech.name}</span>
+              </div>
             ))}
           </div>
 
           {/* Newsletter */}
           <div>
             <h4 style={{ marginBottom: 20 }}>Newsletter</h4>
-
             <form
               onSubmit={handleNewsletterSubmit}
               style={{ display: "flex", gap: 10 }}
@@ -150,13 +194,13 @@ export default function Footer() {
                 placeholder="Email Address"
                 style={{
                   flex: 1,
-                  padding: "10px 15px", // Padding thodi badhayi hai mobile touch ke liye
+                  padding: "10px 15px",
                   borderRadius: 6,
                   border: "none",
-                  outline: "none", // Focus outline hatane ke liye
-                  backgroundColor: "#fff", // Background fix kiya
-                  color: "#000", // 👈 Ye line text ko visible banayegi
-                  fontSize: "16px", // 👈 Mobile par zoom prevent karne ke liye 16px best hai
+                  outline: "none",
+                  backgroundColor: "#fff",
+                  color: "#000",
+                  fontSize: "16px",
                 }}
               />
               <button
@@ -169,13 +213,20 @@ export default function Footer() {
                   borderRadius: 6,
                   cursor: "pointer",
                   color: "#fff",
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
                 }}
               >
-                {loading ? <Loader2 size={16} /> : <Send size={16} />}
+                {loading ? (
+                  <Loader2 size={16} className="animate-spin" />
+                ) : (
+                  <Send size={16} />
+                )}
               </button>
             </form>
 
-            {/* ✅ Social Links */}
+            {/* Social Links */}
             <div style={{ marginTop: 20, display: "flex", gap: 10 }}>
               <IconButton
                 component="a"
@@ -186,7 +237,6 @@ export default function Footer() {
               >
                 <InstagramIcon />
               </IconButton>
-
               <IconButton
                 component="a"
                 href="https://www.linkedin.com/in/web-trezor-8992093b2/"
@@ -196,7 +246,6 @@ export default function Footer() {
               >
                 <LinkedInIcon />
               </IconButton>
-
               <IconButton
                 component="a"
                 href="mailto:webtrezor01@gmail.com"
@@ -208,7 +257,6 @@ export default function Footer() {
           </div>
         </div>
 
-        {/* Snackbar */}
         <Snackbar
           open={status.open}
           autoHideDuration={4000}

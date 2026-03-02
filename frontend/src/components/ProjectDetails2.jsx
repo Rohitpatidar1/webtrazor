@@ -17,20 +17,19 @@ import {
 import { useTheme } from "@mui/material/styles";
 
 const SectionHeading = ({ children, icon: Icon, isDarkMode }) => (
-  <div className="flex items-center gap-3 mb-6 md:mb-8 group">
+  <div className="flex items-center gap-3 mb-8 group">
     <div
-      className={`p-2 md:p-2.5 rounded-xl ${isDarkMode ? "bg-[#00BF56]/10" : "bg-[#00BF56]/5"}`}
+      className={`p-2.5 rounded-xl ${isDarkMode ? "bg-emerald-500/10" : "bg-emerald-50"}`}
     >
       {Icon && (
         <Icon
           className="text-[#00BF56] group-hover:rotate-12 transition-transform"
-          size={20}
-          md={22}
+          size={22}
         />
       )}
     </div>
     <h2
-      className={`text-xl md:text-2xl font-extrabold tracking-tight ${isDarkMode ? "text-white" : "text-[#0B3C5D]"}`}
+      className={`text-2xl font-extrabold tracking-tight ${isDarkMode ? "text-white" : "text-[#0B3C5D]"}`}
     >
       {children}
     </h2>
@@ -131,21 +130,24 @@ export default function ProjectDetails2() {
       <div
         className={`min-h-screen flex items-center justify-center ${isDarkMode ? "bg-[#05111a]" : "bg-slate-50"}`}
       >
-        <Loader2 className="animate-spin text-[#00BF56]" size={48} />
+        <Loader2 className="animate-spin text-emerald-500" size={48} />
       </div>
     );
 
   if (!project)
     return <div className="text-center py-20 font-bold">Project Not Found</div>;
 
-  const techList = project.technologies
-    ? project.technologies.split(",")
-    : ["React", "MERN", "Tailwind"];
+  // FIX: Convert technology string or array from Admin to usable list
+  const displayTechStack = project.technologies
+    ? Array.isArray(project.technologies)
+      ? project.technologies
+      : project.technologies.split(",").map((t) => t.trim())
+    : [];
 
   const inputClasses = `w-full px-5 py-3 rounded-xl border outline-none transition-all ${
     isDarkMode
-      ? "bg-white/5 border-white/10 text-white focus:border-[#00BF56]"
-      : "bg-slate-100 border-slate-200 focus:border-[#00BF56]"
+      ? "bg-white/5 border-white/10 text-white focus:border-emerald-500"
+      : "bg-slate-100 border-slate-200 focus:border-emerald-500"
   }`;
 
   return (
@@ -154,45 +156,40 @@ export default function ProjectDetails2() {
     >
       <style>{`
         @keyframes marquee { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
-        .animate-marquee { display: flex; width: max-content; animation: marquee 30s linear infinite; gap: 1rem; }
-        @media (min-width: 768px) { .animate-marquee { gap: 1.5rem; } }
+        .animate-marquee { display: flex; width: max-content; animation: marquee 30s linear infinite; gap: 1.5rem; }
       `}</style>
 
-      {/* Navigation */}
-      <nav className="container mx-auto px-4 md:px-6 pt-16 md:pt-20 pb-6">
+      <nav className="container mx-auto px-6 pt-20 pb-6">
         <button
           onClick={() => window.history.back()}
-          className="flex items-center gap-2 font-bold hover:text-[#00BF56] transition-colors"
+          className="flex items-center gap-2 font-bold hover:text-emerald-500 transition-colors"
         >
-          <ChevronLeft size={18} />{" "}
-          <span className="text-sm md:text-base">Back to Portfolio</span>
+          <ChevronLeft size={18} /> Back to Portfolio
         </button>
       </nav>
 
-      <main className="container mx-auto px-4 md:px-6">
-        {/* Header Section */}
-        <section className="mb-8 md:mb-12">
-          <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 md:gap-6 mb-6 md:mb-8">
+      <main className="container mx-auto px-6">
+        <section className="mb-12">
+          <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-8">
             <h1
-              className={`text-3xl md:text-5xl font-black leading-tight ${isDarkMode ? "text-white" : "text-[#0B3C5D]"}`}
+              className={`text-4xl md:text-5xl font-black ${isDarkMode ? "text-white" : "text-[#0B3C5D]"}`}
             >
               {project.title}
-              <span className="text-[#00BF56]">.</span>
+              <span className="text-emerald-500">.</span>
             </h1>
             {project.live_url && (
               <a
                 href={project.live_url}
                 target="_blank"
                 rel="noreferrer"
-                className="w-full md:w-auto text-center justify-center bg-[#00BF56] hover:bg-[#00BF56]/90 text-white px-6 py-3.5 rounded-xl font-black transition-all flex items-center gap-2 shadow-lg shadow-[#00BF56]/20"
+                className="bg-emerald-500 hover:bg-emerald-400 text-[#05111a] px-6 py-3 rounded-xl font-black transition-all flex items-center gap-2"
               >
                 <ExternalLink size={18} /> Live View
               </a>
             )}
           </div>
 
-          {/* Main Media Player */}
-          <div className="relative rounded-2xl md:rounded-[2.5rem] overflow-hidden shadow-2xl h-[250px] sm:h-[400px] md:h-[550px] border border-white/5 bg-black group">
+          <div className="relative rounded-[2.5rem] overflow-hidden shadow-2xl h-[300px] md:h-[550px] border border-white/5 bg-black">
             {currentMedia.type === "video" ? (
               <video
                 key={currentMedia.url}
@@ -213,117 +210,111 @@ export default function ProjectDetails2() {
           </div>
         </section>
 
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 md:gap-12">
-          {/* Left Column (Content) */}
-          <div className="lg:col-span-8 space-y-10 md:space-y-16">
-            {/* Gallery Thumbnails */}
+        <div className="grid lg:grid-cols-12 gap-12">
+          <div className="lg:col-span-8 space-y-16">
             <section>
               <SectionHeading icon={ImageIcon} isDarkMode={isDarkMode}>
                 Gallery
               </SectionHeading>
-              <div className="grid grid-cols-3 sm:grid-cols-4 gap-3 md:gap-4">
+              <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
                 {project.media?.map((item) => (
                   <button
                     key={item.id}
                     onClick={() =>
                       setCurrentMedia({ type: item.type, url: item.file })
                     }
-                    className={`relative rounded-xl md:rounded-2xl overflow-hidden h-20 md:h-28 border-2 md:border-4 transition-all ${currentMedia.url === item.file ? "border-[#00BF56]" : "border-transparent opacity-60 hover:opacity-100"}`}
+                    className={`relative rounded-2xl overflow-hidden h-28 border-4 transition-all ${currentMedia.url === item.file ? "border-emerald-500" : "border-transparent opacity-60 hover:opacity-100"}`}
                   >
                     {item.type === "video" && (
                       <div className="absolute inset-0 bg-black/30 flex items-center justify-center z-10">
-                        <Play
-                          size={16}
-                          md={20}
-                          className="text-white fill-white"
-                        />
+                        <Play size={20} className="text-white fill-white" />
                       </div>
                     )}
                     <img
                       src={item.file}
                       className="w-full h-full object-cover"
-                      alt="Thumbnail"
+                      alt="Project media thumbnail"
                     />
                   </button>
                 ))}
               </div>
             </section>
 
-            {/* Project Details Card */}
             <section
-              className={`p-6 md:p-10 rounded-2xl md:rounded-[2.5rem] ${isDarkMode ? "bg-white/5 border border-white/10" : "bg-white shadow-xl shadow-slate-200/50"}`}
+              className={`p-10 rounded-[2.5rem] ${isDarkMode ? "bg-white/5 border border-white/10" : "bg-white shadow-xl"}`}
             >
               <SectionHeading icon={Code2} isDarkMode={isDarkMode}>
                 Project Story
               </SectionHeading>
-
-              <div className="flex flex-col sm:flex-row flex-wrap gap-4 md:gap-6 mb-8 p-4 md:p-6 rounded-2xl bg-[#00BF56]/5 border border-[#00BF56]/10">
-                <div className="flex items-center gap-3">
-                  <Tag size={18} className="text-[#00BF56]" />
-                  <span className="text-xs md:text-sm font-bold uppercase">
+              <div className="flex flex-wrap gap-6 mb-8 p-4 rounded-2xl bg-emerald-500/5 border border-emerald-500/10">
+                <div className="flex items-center gap-2">
+                  <Tag size={18} className="text-emerald-500" />
+                  <span className="text-sm font-bold uppercase">
                     {project.category_name}
                   </span>
                 </div>
-                <div className="flex items-center gap-3">
-                  <MapPin size={18} className="text-[#00BF56]" />
-                  <span className="text-xs md:text-sm font-bold uppercase">
+                <div className="flex items-center gap-2">
+                  <MapPin size={18} className="text-emerald-500" />
+                  <span className="text-sm font-bold uppercase">
                     {project.location}
                   </span>
                 </div>
-                <div className="flex items-center gap-3">
-                  <Calendar size={18} className="text-[#00BF56]" />
-                  <span className="text-xs md:text-sm font-bold uppercase">
+                <div className="flex items-center gap-2">
+                  <Calendar size={18} className="text-emerald-500" />
+                  <span className="text-sm font-bold uppercase">
                     {project.client_name}
                   </span>
                 </div>
               </div>
-
-              <p className="text-base md:text-lg leading-relaxed opacity-90 whitespace-pre-line mb-10">
+              <p className="text-lg leading-relaxed opacity-90 whitespace-pre-line mb-10">
                 {project.description}
               </p>
 
-              <div className="pt-8 md:pt-10 border-t border-[#00BF56]/10">
-                <SectionHeading icon={Cpu} isDarkMode={isDarkMode}>
-                  Technologies
-                </SectionHeading>
-                <div className="flex flex-wrap gap-2">
-                  {techList.map((tech, i) => (
-                    <span
-                      key={i}
-                      className="px-3 md:px-4 py-2 bg-[#00BF56]/10 rounded-lg text-[10px] md:text-xs font-bold text-[#00BF56] border border-[#00BF56]/20"
-                    >
-                      {tech.trim()}
-                    </span>
-                  ))}
+              {/* FIXED TECHNOLOGY SECTION */}
+              {displayTechStack.length > 0 && (
+                <div className="pt-10 border-t border-emerald-500/10">
+                  <SectionHeading icon={Cpu} isDarkMode={isDarkMode}>
+                    Technologies Used
+                  </SectionHeading>
+                  <div className="flex flex-wrap gap-2">
+                    {displayTechStack.map((tech, i) => (
+                      <span
+                        key={i}
+                        className="px-4 py-2 bg-emerald-500/10 rounded-lg text-xs font-bold text-emerald-500 border border-emerald-500/20"
+                      >
+                        {tech}
+                      </span>
+                    ))}
+                  </div>
                 </div>
-              </div>
+              )}
             </section>
 
-            {/* Marquee Reviews */}
+            {/* Client Reviews - Live from DB */}
             {feedbacks.length > 0 && (
-              <section className="overflow-hidden py-6 md:py-10">
+              <section className="overflow-hidden py-10">
                 <SectionHeading icon={Quote} isDarkMode={isDarkMode}>
-                  Reviews
+                  Client Reviews
                 </SectionHeading>
                 <div className="animate-marquee">
                   {[...feedbacks, ...feedbacks].map((fb, idx) => (
                     <div
                       key={idx}
-                      className={`w-[260px] md:w-[320px] p-6 md:p-8 rounded-2xl border ${isDarkMode ? "bg-white/5 border-white/10" : "bg-white shadow-lg border-slate-100"}`}
+                      className={`w-[320px] p-8 rounded-2xl border ${isDarkMode ? "bg-white/5 border-white/10" : "bg-white shadow-lg"}`}
                     >
                       <div className="flex gap-1 mb-3">
                         {[...Array(Number(fb.rating))].map((_, i) => (
                           <Star
                             key={i}
                             size={12}
-                            className="fill-[#00BF56] text-[#00BF56]"
+                            className="fill-emerald-500 text-emerald-500"
                           />
                         ))}
                       </div>
-                      <p className="text-xs md:text-sm italic mb-4 opacity-80 leading-relaxed">
+                      <p className="text-sm italic mb-4 opacity-80 leading-relaxed">
                         "{fb.message}"
                       </p>
-                      <p className="font-black text-[10px] md:text-xs text-[#00BF56] tracking-widest uppercase">
+                      <p className="font-black text-xs text-emerald-500 tracking-widest uppercase">
                         — {fb.name}
                       </p>
                     </div>
@@ -333,21 +324,15 @@ export default function ProjectDetails2() {
             )}
           </div>
 
-          {/* Right Column (Sidebar/Form) */}
-          <aside className="lg:col-span-4 h-fit lg:sticky lg:top-28">
+          <aside className="lg:col-span-4 lg:sticky lg:top-28 h-fit">
             <div
-              className={`p-6 md:p-8 rounded-2xl md:rounded-[2rem] ${isDarkMode ? "bg-[#0a2538] border border-white/10 shadow-2xl" : "bg-white shadow-xl shadow-slate-200/50"}`}
+              className={`p-8 rounded-[2rem] ${isDarkMode ? "bg-[#0a2538] border border-white/10 shadow-2xl" : "bg-white shadow-xl"}`}
             >
-              <h3
-                className={`text-xl font-black mb-6 ${isDarkMode ? "text-white" : "text-[#0B3C5D]"}`}
-              >
-                Add Insight
-              </h3>
-
+              <h3 className="text-xl font-black mb-6">Add Insight</h3>
               <div className="relative min-h-[300px]">
                 {submitted ? (
                   <div className="absolute inset-0 flex flex-col items-center justify-center bg-transparent animate-in fade-in duration-500">
-                    <div className="mb-4 bg-[#00BF56] text-white rounded-full p-3 scale-110 shadow-lg shadow-[#00BF56]/30">
+                    <div className="mb-4 bg-emerald-500 text-white rounded-full p-3 scale-110">
                       <Star size={30} className="fill-white" />
                     </div>
                     <p className="font-black text-lg">Thank You!</p>
@@ -370,7 +355,7 @@ export default function ProjectDetails2() {
                       }
                     />
                     <div className="flex items-center gap-3 px-2">
-                      <span className="text-[10px] md:text-xs font-bold uppercase opacity-60">
+                      <span className="text-xs font-bold uppercase opacity-60">
                         Rating:
                       </span>
                       <div className="flex gap-1">
@@ -383,11 +368,10 @@ export default function ProjectDetails2() {
                             }
                           >
                             <Star
-                              size={18}
-                              md={20}
+                              size={20}
                               className={
                                 num <= formData.rating
-                                  ? "fill-[#00BF56] text-[#00BF56]"
+                                  ? "fill-emerald-500 text-emerald-500"
                                   : "text-slate-400"
                               }
                             />
@@ -407,7 +391,7 @@ export default function ProjectDetails2() {
                     />
                     <button
                       disabled={submitting}
-                      className="w-full bg-[#00BF56] hover:bg-[#00BF56]/90 disabled:opacity-50 text-white py-4 rounded-xl font-black transition-all flex items-center justify-center gap-2 shadow-lg shadow-[#00BF56]/20"
+                      className="w-full bg-emerald-500 hover:bg-emerald-400 disabled:opacity-50 text-[#05111a] py-4 rounded-xl font-black transition-all flex items-center justify-center gap-2"
                     >
                       {submitting ? (
                         <Loader2 className="animate-spin" size={20} />
