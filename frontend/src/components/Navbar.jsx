@@ -7,7 +7,7 @@ import MenuIcon from "@mui/icons-material/Menu";
 import CloseIcon from "@mui/icons-material/Close";
 import Brightness4Icon from "@mui/icons-material/Brightness4";
 import Brightness7Icon from "@mui/icons-material/Brightness7";
-import logo from "../assets/ori_logo-removebg-preview.png";
+import logo from "../assets/ChatGPT2_Image_Mar_2__2026__10_06_39_AM-removebg-preview.png";
 
 export default function Navbar() {
   const navigate = useNavigate();
@@ -20,28 +20,21 @@ export default function Navbar() {
 
   useEffect(() => {
     let requestRunning = null;
-
     const handleScroll = () => {
       if (requestRunning) return;
-
       requestRunning = window.requestAnimationFrame(() => {
         setIsScrolled(window.scrollY > 20);
-
         const winScroll =
           document.body.scrollTop || document.documentElement.scrollTop;
         const height =
           document.documentElement.scrollHeight -
           document.documentElement.clientHeight;
-
         if (height > 0) {
-          const scrolled = (winScroll / height) * 100;
-          setScrollWidth(scrolled);
+          setScrollWidth((winScroll / height) * 100);
         }
-
         requestRunning = null;
       });
     };
-
     window.addEventListener("scroll", handleScroll, { passive: true });
     return () => {
       window.removeEventListener("scroll", handleScroll);
@@ -70,23 +63,23 @@ export default function Navbar() {
         className={`fixed top-0 left-0 w-full z-[1000] transition-all duration-500 ease-in-out ${
           isScrolled
             ? isDarkMode
-              ? "bg-black/85 backdrop-blur-lg border-b border-white/10 py-2 shadow-2xl" // Black theme on scroll
-              : "bg-[#0B3C5D]/85 backdrop-blur-lg border-b border-white/10 py-2 shadow-2xl"
+              ? "bg-black/90 backdrop-blur-lg border-b border-white/10 py-2 shadow-2xl"
+              : "bg-[#0B3C5D]/90 backdrop-blur-lg border-b border-white/10 py-2 shadow-2xl"
             : isDarkMode
-              ? "bg-black py-4 border-b border-transparent" // Solid Black theme
+              ? "bg-black py-4 border-b border-transparent"
               : "bg-[#0B3C5D] py-4 border-b border-transparent"
         }`}
       >
         <div className="max-w-7xl mx-auto flex justify-between items-center px-6">
           <NavLink
             to="/"
-            className="flex items-center gap-3 no-underline group"
+            className="flex items-center gap-0 no-underline group"
           >
             <img
               src={logo}
               alt="WebTREZOR Logo"
               className={`w-auto object-contain transition-all duration-500 group-hover:scale-110 ${
-                isScrolled ? "h-9" : "h-10 md:h-12"
+                isScrolled ? "h-12" : "h-14 md:h-16"
               }`}
             />
             <span className="text-white text-xl md:text-2xl font-black tracking-tighter uppercase italic">
@@ -102,23 +95,19 @@ export default function Navbar() {
                 to={item.path}
                 className={({ isActive }) => `
                   relative px-4 py-2 text-sm font-bold transition-all duration-300 no-underline
-                  ${isActive ? "text-[#FF8C00]" : "text-gray-200"}
-                  hover:text-[#FF8C00] group/link
+                  ${isActive ? "text-[#00BF56]" : "text-gray-200"}
+                  hover:text-[#00BF56] group/link
                 `}
               >
                 {item.name}
-                {({ isActive }) => (
-                  <span
-                    className={`absolute bottom-0 left-1/2 -translate-x-1/2 h-[3px] bg-[#FF8C00] rounded-full transition-all duration-400 
-                   ${isActive ? "w-1/2 opacity-100" : "w-0 opacity-0 group-hover/link:w-1/2 group-hover/link:opacity-100"}`}
-                  />
-                )}
+                {/* Underline matching Secondary Color */}
+                <span className="absolute bottom-0 left-1/2 -translate-x-1/2 w-0 h-0.5 bg-[#00BF56] group-hover/link:w-full transition-all duration-300" />
               </NavLink>
             ))}
 
             <button
               onClick={colorMode.toggleColorMode}
-              className="p-2 mx-2 rounded-full transition-all border-none bg-transparent cursor-pointer text-white hover:bg-white/10"
+              className="p-2 mx-2 rounded-full transition-all border-none bg-transparent cursor-pointer text-white hover:bg-white/10 hover:text-[#00BF56]"
             >
               {isDarkMode ? <Brightness7Icon /> : <Brightness4Icon />}
             </button>
@@ -149,23 +138,19 @@ export default function Navbar() {
 
         {/* MOBILE OVERLAY MENU */}
         <div
-          className={`fixed top-[64px] left-0 w-full h-screen transition-all duration-500 ease-in-out transform md:hidden ${
+          className={`fixed top-0 left-0 w-full h-screen transition-all duration-500 ease-in-out transform md:hidden flex flex-col justify-center items-center z-[-1] ${
             isDarkMode ? "bg-black" : "bg-[#0B3C5D]"
-          } ${
-            isMenuOpen
-              ? "translate-x-0 opacity-100"
-              : "-translate-x-full opacity-0"
-          }`}
+          } ${isMenuOpen ? "translate-y-0" : "-translate-y-full"}`}
         >
-          <div className="flex flex-col items-center pt-10 space-y-6">
+          <div className="flex flex-col items-center space-y-8">
             {menuItems.map((item) => (
               <NavLink
                 key={item.name}
                 to={item.path}
                 onClick={toggleMenu}
                 className={({ isActive }) => `
-                  text-xl font-bold transition-all duration-300 no-underline
-                  ${isActive ? "text-[#FF8C00]" : "text-gray-200"}
+                  text-2xl font-bold transition-all duration-300 no-underline
+                  ${isActive ? "text-[#00BF56]" : "text-gray-200 hover:text-[#00BF56]"}
                 `}
               >
                 {item.name}
@@ -177,9 +162,9 @@ export default function Navbar() {
                 colorMode.toggleColorMode();
                 toggleMenu();
               }}
-              className="flex items-center gap-2 px-6 py-2 rounded-full bg-white/10 text-white border-none cursor-pointer"
+              className="flex items-center gap-2 px-8 py-3 rounded-full bg-white/10 text-white border-none cursor-pointer hover:bg-[#00BF56]/20"
             >
-              {isDarkMode ? <Brightness7Icon /> : <Brightness4Icon />}{" "}
+              {isDarkMode ? <Brightness7Icon /> : <Brightness4Icon />}
               {isDarkMode ? "Light Mode" : "Dark Mode"}
             </button>
 
@@ -188,7 +173,7 @@ export default function Navbar() {
                 navigate("/contact");
                 toggleMenu();
               }}
-              className="w-[80%] bg-[#00BF56] text-white font-black py-4 rounded-xl border-none cursor-pointer shadow-lg"
+              className="w-64 bg-[#00BF56] text-white font-black py-4 rounded-xl border-none cursor-pointer shadow-lg active:scale-95 transition-transform"
             >
               Contact Us
             </button>
@@ -196,20 +181,20 @@ export default function Navbar() {
         </div>
 
         {/* SCROLL PROGRESS BAR */}
-        <div className="absolute bottom-0 left-0 w-full h-[3px] bg-white/10 pointer-events-none">
+        <div className="absolute bottom-0 left-0 w-full h-[3px] bg-white/5 pointer-events-none">
           <div
-            className="h-full shadow-[0_0_12px_#00BF56]" // Glowing effect color updated
+            className="h-full shadow-[0_0_10px_#00BF56]"
             style={{
               width: `${scrollWidth}%`,
-              backgroundColor: "#00BF56", // Secondary color added here
-              transition: "none",
+              backgroundColor: "#00BF56",
+              transition: "width 0.1s linear",
               willChange: "width",
             }}
           />
         </div>
       </nav>
-
-      <div className="h-24" />
+      {/* Spacer to prevent content from going under navbar */}
+      <div className={isScrolled ? "h-16" : "h-20 md:h-24"} />
     </>
   );
 }

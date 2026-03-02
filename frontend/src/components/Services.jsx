@@ -71,16 +71,24 @@ const serviceData = {
   ],
   faqs: [
     {
-      q: "How long does a typical project take?",
-      a: "Most projects take between 2 to 6 weeks depending on the complexity.",
+      q: "How long does it take to complete a project?",
+      a: "The timeline depends on the project's complexity. Typically, a professional business website takes 2-4 weeks, while complex E-commerce or SaaS platforms may take 6-10 weeks.",
     },
     {
-      q: "Do you provide maintenance after launch?",
-      a: "Yes, we offer various maintenance packages to keep your assets updated.",
+      q: "Do you provide post-launch maintenance and support?",
+      a: "Yes, we offer 6 months of free maintenance and 24/7 technical support after deployment to ensure your digital product runs smoothly without any glitches.",
     },
     {
-      q: "Can you redesign my existing brand?",
-      a: "Absolutely! We specialize in modernizing outdated designs and systems.",
+      q: "Will my website be mobile-friendly and SEO-optimized?",
+      a: "Absolutely! Every project we build is 100% responsive (mobile-first design) and follows the latest SEO best practices to help you rank higher on search engines.",
+    },
+    {
+      q: "Which technologies do you use for development?",
+      a: "We specialize in the MERN stack (MongoDB, Express, React, Node.js), Tailwind CSS, and Next.js. For AI and Automation, we use Python and advanced API integrations.",
+    },
+    {
+      q: "Can you redesign my existing website?",
+      a: "Yes! We can revamp your current website with a modern UI/UX, faster loading speeds, and better performance while keeping your existing data safe.",
     },
   ],
   stats: [
@@ -416,8 +424,8 @@ export default function Services() {
               Innovation Se <span className="text-[#00BF56]">Success</span> Tak.
             </h1>
             <p className="text-xl text-blue-100 opacity-80 max-w-xl mx-auto lg:mx-0">
-              Professional digital presence ke liye step-by-step request fill
-              karein.
+              Start your journey toward a powerful professional digital presence
+              by filling out the form below.
             </p>
             <div className="flex flex-wrap justify-center lg:justify-start gap-5">
               <button

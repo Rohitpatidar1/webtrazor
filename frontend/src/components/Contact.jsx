@@ -25,23 +25,22 @@ const Contact = () => {
     message: "",
   });
 
-  // Business Details
+  // Business Details - FIXED URLs
   const contactDetails = {
     address: "Indore, Madhya Pradesh, India",
     phone: "+917389674558",
     displayPhone: "+91 7389674558",
     email: "webtrezor01@gmail.com",
-    // Link for the external map navigation
+    // Fixed: Search query for Indore location
     mapExternalLink:
       "https://www.google.com/maps/search/?api=1&query=Indore+Madhya+Pradesh+India",
-    // Fixed: Embed URL for the iframe
+    // Fixed: Working Google Maps Embed URL for Indore
     mapEmbedUrl:
-      "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d117763.55667104047!2d75.7938095!3d22.7239117!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3962fcad1b4ca6d3%3A0xb7830f40577979f9!2sIndore%2C%20Madhya%20Pradesh!5e0!3m2!1sen!2sin!4v1709000000000",
+      "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d117763.5553034947!2d75.76437149726563!3d22.723911700000003!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3962fcad1b4cbd13%3A0x6d9006691f37920!2sIndore%2C%20Madhya%20Pradesh!5e0!3m2!1sen!2sin!4v1709400000000!5m2!1sen!2sin",
     socials: {
-      linkedin: "/contact",
-      twitter: "/contact",
-      github: "/contact",
-      website: "/",
+      // Fixed: No leading slash
+      linkedin: "https://www.linkedin.com/in/web-trezor-8992093b2/",
+      github: "https://github.com/webtrezor01-cmd",
     },
   };
 
@@ -51,8 +50,6 @@ const Contact = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
-    // YAHAN APNI FORMSPREE ID DALEIN
     const FORMSPREE_URL = "https://formspree.io/f/mqedjbez";
 
     try {
@@ -64,7 +61,6 @@ const Contact = () => {
 
       if (response.ok) {
         alert("Success! Your message has been sent to WebTrezor.");
-        // Form clear karne ke liye
         setFormData({
           name: "",
           email: "",
@@ -123,11 +119,7 @@ const Contact = () => {
           <div className="grid lg:grid-cols-3 gap-10">
             {/* Left Panel: Contact Info */}
             <aside
-              className={`p-10 rounded-[2.5rem] shadow-2xl flex flex-col justify-between transition-all ${
-                isDarkMode
-                  ? "bg-[#0a2538] border border-white/5"
-                  : "bg-white border border-slate-100"
-              }`}
+              className={`p-10 rounded-[2.5rem] shadow-2xl flex flex-col justify-between transition-all ${isDarkMode ? "bg-[#0a2538] border border-white/5" : "bg-white border border-slate-100"}`}
             >
               <div className="space-y-10">
                 <h3
@@ -232,11 +224,7 @@ const Contact = () => {
 
             {/* Right Panel: Contact Form */}
             <main
-              className={`lg:col-span-2 p-10 md:p-14 rounded-[2.5rem] shadow-2xl relative overflow-hidden transition-all ${
-                isDarkMode
-                  ? "bg-[#0a2538] border border-white/5"
-                  : "bg-white border border-slate-100"
-              }`}
+              className={`lg:col-span-2 p-10 md:p-14 rounded-[2.5rem] shadow-2xl relative overflow-hidden transition-all ${isDarkMode ? "bg-[#0a2538] border border-white/5" : "bg-white border border-slate-100"}`}
             >
               <div className="absolute top-0 left-0 w-full h-2 bg-[#00BF56]"></div>
               <h3
@@ -263,7 +251,6 @@ const Contact = () => {
                     onChange={handleChange}
                   />
                 </div>
-
                 <div className="space-y-2">
                   <label className="text-sm font-bold opacity-70">
                     Email Address
@@ -278,7 +265,6 @@ const Contact = () => {
                     onChange={handleChange}
                   />
                 </div>
-
                 <div className="space-y-2">
                   <label className="text-sm font-bold opacity-70">
                     Phone Number
@@ -292,7 +278,6 @@ const Contact = () => {
                     onChange={handleChange}
                   />
                 </div>
-
                 <div className="space-y-2">
                   <label className="text-sm font-bold opacity-70">
                     Subject
@@ -309,7 +294,6 @@ const Contact = () => {
                     <option>Support</option>
                   </select>
                 </div>
-
                 <div className="md:col-span-2 space-y-2">
                   <label className="text-sm font-bold opacity-70">
                     Message
@@ -324,7 +308,6 @@ const Contact = () => {
                     onChange={handleChange}
                   ></textarea>
                 </div>
-
                 <div className="md:col-span-2">
                   <button
                     type="submit"

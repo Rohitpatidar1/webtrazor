@@ -380,7 +380,7 @@ export default function About() {
               name="Narendra Patidar"
               role="Backend Developer"
               image={getDirectLink(
-                "https://drive.google.com/file/d/1-8iw4Uv1ECK9B4RTOmXsdTULhiVdEyUH/view?usp=sharing",
+                "https://drive.google.com/file/d/1uErpsYY-Sbq29OKJtRsDfXAlADwxd-4t/view?usp=sharing",
               )}
               bio="Specialized in server-side development, APIs, and database management."
               isDarkMode={isDarkMode}
@@ -395,8 +395,8 @@ export default function About() {
               )}
               bio="Focused on creating clean, professional, and brand-oriented designs."
               isDarkMode={isDarkMode}
-              linkedin="NA"
-              github="NA"
+              linkedin="https://www.linkedin.com/in/hariprasad-patidar-a955b3305/"
+              github="https://github.com/Hariprasadpatidar"
             />
             <TeamMember
               name="Rohit Patidar"
