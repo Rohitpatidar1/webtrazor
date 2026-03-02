@@ -1,7 +1,8 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { Lock, User, Loader2, Moon, Sun, ShieldCheck } from "lucide-react";
-
+import { API_BASE } from "../../config";
+// API_BASE
 export default function AdminLogin() {
   const [credentials, setCredentials] = useState({
     username: "",
@@ -35,7 +36,7 @@ export default function AdminLogin() {
     setError("");
 
     try {
-      const response = await fetch("http://127.0.0.1:8000/api/admin-login/", {
+      const response = await fetch(`${API_BASE}/api/admin-login/`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(credentials),

@@ -1,5 +1,6 @@
 import { useTheme } from "@mui/material/styles";
 import { useState, useEffect } from "react";
+
 import {
   Plus,
   Edit,
@@ -12,6 +13,7 @@ import {
   User,
   Cpu, // Naya icon technologies ke liye
 } from "lucide-react";
+import { API_BASE } from "../../config";
 
 export default function AdminProjects() {
   const theme = useTheme();
@@ -42,7 +44,7 @@ export default function AdminProjects() {
 
   const fetchProjects = async () => {
     try {
-      const response = await fetch("http://127.0.0.1:8000/api/projects/");
+      const response = await fetch(`${API_BASE}/api/projects/`);
       const data = await response.json();
       setProjects(data);
     } catch (error) {
@@ -52,7 +54,7 @@ export default function AdminProjects() {
 
   const fetchCategories = async () => {
     try {
-      const response = await fetch("http://127.0.0.1:8000/api/categories/");
+      const response = await fetch(`${API_BASE}/api/categories/`);
       const data = await response.json();
       setDbCategories(data);
     } catch (error) {
@@ -96,7 +98,7 @@ export default function AdminProjects() {
       try {
         const token = localStorage.getItem("adminToken");
         const response = await fetch(
-          `http://127.0.0.1:8000/api/project/media/delete/${mediaItem.id}/`,
+          `${API_BASE}/api/project/media/delete/${mediaItem.id}/`,
           {
             method: "DELETE",
             headers: { Authorization: `Token ${token}` },
@@ -131,8 +133,8 @@ export default function AdminProjects() {
     };
 
     const url = isEditing
-      ? `http://127.0.0.1:8000/api/project/update-full/${currentProjectId}/`
-      : "http://127.0.0.1:8000/api/tech/"; // Updated URL as per your request
+      ? `${API_BASE}/api/project/update-full/${currentProjectId}/`
+      : `${API_BASE}/api/tech/`; // Updated URL as per your request
 
     try {
       const response = await fetch(url, {
@@ -179,7 +181,7 @@ export default function AdminProjects() {
     try {
       const token = localStorage.getItem("adminToken");
       const response = await fetch(
-        `http://127.0.0.1:8000/api/project/delete/${id}/`,
+        `${API_BASE}/api/project/delete/${id}/`,
         {
           method: "DELETE",
           headers: { Authorization: `Token ${token}` },

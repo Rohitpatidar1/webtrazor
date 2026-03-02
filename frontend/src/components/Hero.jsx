@@ -3,6 +3,7 @@ import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import { useTheme } from "@mui/material/styles";
 import { Helmet } from "react-helmet-async";
+import { API_BASE } from "../config";
 import {
   Settings,
   Code,
@@ -62,9 +63,7 @@ const Hero = () => {
   useEffect(() => {
     const fetchLatest = async () => {
       try {
-        const response = await fetch(
-          "http://127.0.0.1:8000/api/latest-projects/",
-        );
+        const response = await fetch(`${API_BASE}/api/latest-projects/`);
         const data = await response.json();
         setLatestProjects(data);
       } catch (error) {
@@ -84,7 +83,7 @@ const Hero = () => {
   useEffect(() => {
     const fetchFeedbacks = async () => {
       try {
-        const response = await fetch("http://127.0.0.1:8000/api/feedback/");
+        const response = await fetch(`${API_BASE}/api/feedback/`);
         const data = await response.json();
 
         if (Array.isArray(data)) {

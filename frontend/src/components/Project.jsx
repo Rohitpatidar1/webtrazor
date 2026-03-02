@@ -4,7 +4,7 @@ import { ArrowUpRight } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import { useTheme } from "@mui/material/styles";
 import { Helmet } from "react-helmet-async";
-
+import { API_BASE } from "../config";
 export default function Projects() {
   const navigate = useNavigate();
   const theme = useTheme();
@@ -20,10 +20,12 @@ export default function Projects() {
   const primaryColor = "#0B3C5D";
   const secondaryColor = "#00BF56";
 
+  // ✅ Fetch Categories
   useEffect(() => {
     const fetchCategories = async () => {
       try {
-        const response = await fetch("http://127.0.0.1:8000/api/categories/");
+        const response = await fetch(`${API_BASE}/api/categories/`);
+        if (!response.ok) throw new Error("Failed to fetch categories");
         const data = await response.json();
         setCategories(data);
       } catch (error) {
@@ -37,19 +39,29 @@ export default function Projects() {
     const fetchProjects = async () => {
       setLoading(true);
       try {
-        let url = new URL("http://127.0.0.1:8000/api/projects/");
-        if (catTab !== "All") url.searchParams.append("category", catTab);
-        if (subTab !== "All") url.searchParams.append("subcategory", subTab);
+        let url = new URL(`${API_BASE}/api/projects/`);
+
+        if (catTab !== "All") {
+          url.searchParams.append("category", catTab);
+        }
+
+        if (subTab !== "All") {
+          url.searchParams.append("subcategory", subTab);
+        }
 
         const response = await fetch(url);
+        if (!response.ok) throw new Error("Failed to fetch projects");
+
         const data = await response.json();
         setProjects(data);
       } catch (error) {
         console.error("Error fetching projects:", error);
+        setProjects([]);
       } finally {
         setLoading(false);
       }
     };
+
     fetchProjects();
   }, [catTab, subTab]);
 

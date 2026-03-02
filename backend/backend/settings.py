@@ -25,7 +25,8 @@ SECRET_KEY = "django-insecure-rz7u0ecn##*l0vwqly$rs0y%i)rk94-*ky%k5m*)&n1z^&uib7
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ["webtrazor.onrender.com"]
+# ALLOWED_HOSTS = ["webtrazor.onrender.com"]
+ALLOWED_HOSTS = ["webtrazor.onrender.com", "127.0.0.1", "localhost"]
 
 # settings.py
 

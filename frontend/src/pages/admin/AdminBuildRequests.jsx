@@ -2,6 +2,7 @@ import { useTheme } from "@mui/material/styles";
 import { useState, useEffect, useRef } from "react"; // useRef add kiya
 import jsPDF from "jspdf"; // PDF ke liye
 import html2canvas from "html2canvas"; // Screenshot/Canvas ke liye
+// API_BASE
 import {
   Search,
   Trash2,
@@ -20,6 +21,7 @@ import {
   User,
   Hash,
 } from "lucide-react";
+import { API_BASE } from "../../config";
 
 export default function AdminBuildRequests() {
   const theme = useTheme();
@@ -54,7 +56,7 @@ export default function AdminBuildRequests() {
     try {
       setLoading(true);
       const token = localStorage.getItem("adminToken");
-      const response = await fetch("http://127.0.0.1:8000/api/request/build/", {
+      const response = await fetch(`${API_BASE}/api/request/build/`, {
         method: "GET",
         headers: {
           Authorization: `Token ${token}`,
@@ -81,7 +83,7 @@ export default function AdminBuildRequests() {
     const token = localStorage.getItem("adminToken");
     try {
       const response = await fetch(
-        `http://127.0.0.1:8000/api/admin/delete-build-request/${id}/`,
+        `${API_BASE}/api/admin/delete-build-request/${id}/`,
         {
           method: "DELETE",
           headers: { Authorization: `Token ${token}` },

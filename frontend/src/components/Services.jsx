@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Helmet } from "react-helmet-async";
+import { API_BASE } from "../config";
 import {
   Settings,
   Cpu,
@@ -151,7 +152,7 @@ const ServiceModal = ({ isOpen, onClose, selectedService, isDarkMode }) => {
       const service = encodeURIComponent(formData.service_type);
       const location = encodeURIComponent(formData.location);
       const response = await fetch(
-        `http://127.0.0.1:8000/api/providers/${service}/${location}/`,
+        `${API_BASE}/api/providers/${service}/${location}/`,
       );
       if (!response.ok) throw new Error("Server error");
       const data = await response.json();
@@ -169,14 +170,11 @@ const ServiceModal = ({ isOpen, onClose, selectedService, isDarkMode }) => {
     e.preventDefault();
     setLoading(true);
     try {
-      const response = await fetch(
-        "http://127.0.0.1:8000/api/request/service/",
-        {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify(formData),
-        },
-      );
+      const response = await fetch(`${API_BASE}/api/request/service/`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(formData),
+      });
       if (response.ok) setIsSent(true);
       else throw new Error("Submission failed");
     } catch (error) {

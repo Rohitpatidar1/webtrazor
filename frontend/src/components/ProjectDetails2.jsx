@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
+import { API_BASE } from "../config";
 import {
   ChevronLeft,
   Quote,
@@ -56,9 +57,7 @@ export default function ProjectDetails2() {
 
   const fetchFeedbacks = async () => {
     try {
-      const response = await fetch(
-        `http://127.0.0.1:8000/api/feedback/?project=${id}`,
-      );
+      const response = await fetch(`${API_BASE}/api/feedback/?project=${id}`);
       if (response.ok) {
         const data = await response.json();
         setFeedbacks(Array.isArray(data) ? data : data.results || []);
@@ -71,9 +70,7 @@ export default function ProjectDetails2() {
   useEffect(() => {
     const fetchProjectDetails = async () => {
       try {
-        const response = await fetch(
-          `http://127.0.0.1:8000/api/projects/${id}/`,
-        );
+        const response = await fetch(`${API_BASE}/api/projects/${id}/`);
         if (!response.ok) throw new Error("Project not found");
 
         const data = await response.json();
@@ -100,7 +97,7 @@ export default function ProjectDetails2() {
     e.preventDefault();
     setSubmitting(true);
     try {
-      const response = await fetch("http://127.0.0.1:8000/api/feedback/", {
+      const response = await fetch(`${API_BASE}/api/feedback/`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({

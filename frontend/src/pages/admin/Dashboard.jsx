@@ -16,6 +16,7 @@ import {
 
 import RecentProjects from "../../components/admin/RecentProjects";
 import RecentRequests from "../../components/admin/RecentRequests";
+import { API_BASE } from "../../config";
 
 const PRIMARY = "#0B3C5D";
 const SECONDARY = "#00BF56";
@@ -84,9 +85,9 @@ export default function Dashboard() {
       const headers = { Authorization: `Token ${token}` };
 
       const [statsRes, projectsRes, servicesRes] = await Promise.all([
-        fetch("http://127.0.0.1:8000/api/admin/dashboard-stats/", { headers }),
-        fetch("http://127.0.0.1:8000/api/latest-projects/"),
-        fetch("http://127.0.0.1:8000/api/latest-build-requests/", { headers }),
+        fetch(`${API_BASE}/api/admin/dashboard-stats/`, { headers }),
+        fetch(`${API_BASE}/api/latest-projects/`),
+        fetch(`${API_BASE}/api/latest-build-requests/`, { headers }),
       ]);
 
       if (statsRes.ok) setStats(await statsRes.json());
